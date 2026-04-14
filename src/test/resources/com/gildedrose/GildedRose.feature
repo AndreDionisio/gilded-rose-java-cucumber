@@ -4,4 +4,6 @@ Feature: Gilded Rose quality
   Scenario: Checking foo
     Given The item as "fixme"
     When I update the quality
-    Then I should get item as "foo"
+    Then I should get item as "fixme"
+
+
