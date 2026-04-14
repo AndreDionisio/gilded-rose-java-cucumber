@@ -5,13 +5,17 @@ repositories {
     mavenCentral()
 }
 
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
 
 dependencies {
     implementation 'org.codehaus.groovy:groovy:3.0.8'
     testImplementation 'io.cucumber:cucumber-java:7.14.0'
     testImplementation 'io.cucumber:cucumber-junit-platform-engine:7.14.0'
+    testImplementation 'org.junit.platform:junit-platform-suite:1.10.0'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
 }
 
@@ -25,6 +29,11 @@ test {
     useJUnitPlatform()
     testLogging {
         events "passed", "skipped", "failed"
+        showStandardStreams = true
+        exceptionFormat = "full"
+        showCauses true
+        showStackTraces true
+        displayGranularity = 0
     }
 }
 

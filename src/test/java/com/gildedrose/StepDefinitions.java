@@ -3,13 +3,19 @@ package com.gildedrose;
 import static org.junit.jupiter.api.Assertions.*;
 
 
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
+import io.cucumber.java.Scenario;
 public class StepDefinitions {
     private Item[] items = new Item[1];
     private GildedRose app;
+
+    @Before
+    public void printScenarioName(Scenario scenario) {
+        System.out.println(scenario.getName());
+    }
 
     @Given("The item as {string}")
     public void initial_sellin_is_and_quality_is(String name) {
@@ -26,5 +32,29 @@ public class StepDefinitions {
     public void i_should_get_sellin_as_and_quality_as(String expected) {
         assertEquals(expected, app.items[0].name);
     }
+
+    @Given("an item {string} with sellIn {int} and quality {int}")
+    public void an_item_with_sellIn_and_quality(String name, int sellIn, int quality) {
+        items[0] = new Item(name, sellIn, quality);
+        app = new GildedRose(items);
+    }
+
+    @When("I update the quality for {int} days")
+    public void i_update_the_quality_for_days(int days) {
+        for (int i = 0; i < days; i++) {
+            app.updateQuality();
+        }
+    }
+
+    @Then("The final sellIn should be {int}")
+    public void the_final_sellIn_should_be(int expected) {
+        assertEquals(expected, items[0].sellIn);
+    }
+
+    @Then("The final quality should be {int}")
+    public void the_final_quality_should_be(int expected) {
+        assertEquals(expected, items[0].quality);
+    }
+
 }
 
