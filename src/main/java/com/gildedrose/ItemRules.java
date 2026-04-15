@@ -18,11 +18,14 @@ public final class ItemRules {
     static void increaseQuality(Item item) {
         item.quality += 1;
     }
+    static void decreaseQuality(Item item, int amount) {
+        item.quality = Math.max(0, item.quality - amount);
+    }
     static void decreaseQuality(Item item) {
-        item.quality -= 1;
+        decreaseQuality(item,1);
     }
     static void decreaseSellIn(Item item) {
-        item.sellIn -= 1;
+        item.sellIn--;
     }
     static boolean isQualityLessThan50(Item item){
         return item.quality < 50;
