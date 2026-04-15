@@ -14,4 +14,4 @@ Feature: Daily quality update simulation
       | Elixir of the Mongoose                    | 5      | 7       | 1    | 4           | 6            |
       | Sulfuras, Hand of Ragnaros                | 0      | 80      | 1    | 0           | 80           |
       | Backstage passes to a TAFKAL80ETC concert | 15     | 20      | 1    | 14          | 21           |
-      | Conjured Mana Cake                        | 3      | 6       | 1    | 2           | 5            |
+      | Conjured Mana Cake                        | 3      | 6       | 1    | 2           | 4            |

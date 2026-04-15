@@ -20,7 +20,7 @@ class GildedRose {
             case "Sulfuras, Hand of Ragnaros" -> { return; }
             case "Aged Brie" -> updateAgedBrie(item);
             case "Backstage passes to a TAFKAL80ETC concert" -> updateBackstagePasses(item);
-            //case String s when s.startsWith("Conjured") -> updateConjured(item);
+            case String s when s.startsWith("Conjured") -> updateConjured(item);
             default -> updateNormalItem(item);
         }
 
