@@ -10,7 +10,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.java.Scenario;
 public class StepDefinitions {
-    private Item[] items = new Item[1];
+    private final Item[] items = new Item[1];
     private GildedRose app;
 
     @Before
@@ -31,12 +31,12 @@ public class StepDefinitions {
 
     @When("I update the quality")
     public void i_update_the_quality() {
-        app.updateQuality();
+        GildedRose.updateQuality();
     }
 
     @Then("I should get item as {string}")
     public void i_should_get_sellin_as_and_quality_as(String expected) {
-        assertEquals(expected, app.items[0].name);
+        assertEquals(expected, GildedRose.items[0].name);
     }
 
     @Given("an item {string} with sellIn {int} and quality {int}")
@@ -48,7 +48,7 @@ public class StepDefinitions {
     @When("I update the quality for {int} days")
     public void i_update_the_quality_for_days(int days) {
         for (int i = 0; i < days; i++) {
-            app.updateQuality();
+            GildedRose.updateQuality();
         }
     }
 

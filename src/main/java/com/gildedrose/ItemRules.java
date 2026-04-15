@@ -2,16 +2,6 @@ package com.gildedrose;
 
 public final class ItemRules {
 
-
-    static boolean isAgedBrie(Item item) {
-        return "Aged Brie".equals(item.name);
-    }
-    static boolean isBackstage(Item item) {
-        return "Backstage passes to a TAFKAL80ETC concert".equals(item.name);
-    }
-    static boolean isSulfuras(Item item) {
-        return "Sulfuras, Hand of Ragnaros".equals(item.name);
-    }
     static void zeroQuality(Item item) {
         item.quality = 0;
     }

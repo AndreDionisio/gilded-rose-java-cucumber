@@ -1,8 +1,6 @@
 package com.gildedrose;
 
 import static com.gildedrose.ItemRules.*;
-import static com.gildedrose.ItemRules.isQualityGreaterThan0;
-
 
 public class ConjuredUpdater implements ItemUpdater {
 

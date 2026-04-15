@@ -33,7 +33,7 @@ test {
     }
 }
 
-task cucumber() {
+tasks.register('cucumber') {
     dependsOn assemble, testClasses
     doLast {
         javaexec {
