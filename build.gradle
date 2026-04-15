@@ -30,10 +30,6 @@ test {
     testLogging {
         events "passed", "skipped", "failed"
         showStandardStreams = true
-        exceptionFormat = "full"
-        showCauses true
-        showStackTraces true
-        displayGranularity = 0
     }
 }
 

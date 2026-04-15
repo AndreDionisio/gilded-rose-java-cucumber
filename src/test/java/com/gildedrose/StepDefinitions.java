@@ -3,6 +3,7 @@ package com.gildedrose;
 import static org.junit.jupiter.api.Assertions.*;
 
 
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,6 +16,11 @@ public class StepDefinitions {
     @Before
     public void printScenarioName(Scenario scenario) {
         System.out.println(scenario.getName());
+    }
+
+    @After
+    public void printScenarioStatus(){
+        System.out.printf("Then the final SellIn is %d and the final Quality is %d",items[0].sellIn,items[0].quality);
     }
 
     @Given("The item as {string}")
