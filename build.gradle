@@ -1,5 +1,9 @@
-apply plugin: "groovy"
-apply plugin: "java"
+plugins {
+    id "java"
+    id "groovy"
+    id "jacoco"
+    id "org.sonarqube" version "7.2.3.7755"
+}
 
 repositories {
     mavenCentral()
@@ -7,16 +11,24 @@ repositories {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(23)
     }
 }
 
 dependencies {
     implementation 'org.codehaus.groovy:groovy:3.0.8'
+
+    // Logging
+    implementation 'org.slf4j:slf4j-api:1.7.32'
+    implementation 'ch.qos.logback:logback-classic:1.5.13'
+
+    // Testing
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    testImplementation 'org.junit.platform:junit-platform-suite:1.10.0'
+
+    // Cucumber
     testImplementation 'io.cucumber:cucumber-java:7.14.0'
     testImplementation 'io.cucumber:cucumber-junit-platform-engine:7.14.0'
-    testImplementation 'org.junit.platform:junit-platform-suite:1.10.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
 }
 
 configurations {
@@ -37,13 +49,35 @@ tasks.register('cucumber') {
     dependsOn assemble, testClasses
     doLast {
         javaexec {
-            main = "io.cucumber.core.cli.Main"
-            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            mainClass = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime +
+                    sourceSets.main.output +
+                    sourceSets.test.output
             args = [
                     '--plugin', 'pretty',
                     '--plugin', 'html:target/cucumber-report.html',
                     '--glue', 'com.gildedrose',
-                    'src/test/resources']
+                    'src/test/resources'
+            ]
         }
+    }
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true   // Required for SonarQube
+        html.required = true  // Human-readable report
+    }
+}
+
+sonar {
+    properties {
+        property "sonar.projectKey", "gildedrose"
+        property "sonar.projectName", "Gilded Rose Kata"
+        property "sonar.sources", "src/main/java"
+        property "sonar.tests", "src/test/java"
+        property "sonar.java.binaries", "build/classes/java/main"
+        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
     }
 }

@@ -11,7 +11,6 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.Scenario;
 public class StepDefinitions {
     private final Item[] items = new Item[1];
-    private GildedRose app;
 
     @Before
     public void printScenarioName(Scenario scenario) {
@@ -26,7 +25,7 @@ public class StepDefinitions {
     @Given("The item as {string}")
     public void initial_sellin_is_and_quality_is(String name) {
         items[0] = new Item(name, 0, 0);
-        app = new GildedRose(items);
+        GildedRose.setItems(items);
     }
 
     @When("I update the quality")
@@ -36,13 +35,13 @@ public class StepDefinitions {
 
     @Then("I should get item as {string}")
     public void i_should_get_sellin_as_and_quality_as(String expected) {
-        assertEquals(expected, GildedRose.items[0].name);
+        assertEquals(expected, GildedRose.getItems()[0].name);
     }
 
     @Given("an item {string} with sellIn {int} and quality {int}")
     public void an_item_with_sellIn_and_quality(String name, int sellIn, int quality) {
         items[0] = new Item(name, sellIn, quality);
-        app = new GildedRose(items);
+        GildedRose.setItems(items);
     }
 
     @When("I update the quality for {int} days")

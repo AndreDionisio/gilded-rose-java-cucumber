@@ -2,6 +2,9 @@ package com.gildedrose;
 
 public final class ItemRules {
 
+    private ItemRules() {
+    }
+
     static void zeroQuality(Item item) {
         item.quality = 0;
     }
