@@ -10,6 +10,7 @@ Feature: Daily quality update simulation
     Examples:
       | name                                      | sellIn | quality | days | finalSellIn | finalQuality |
       | +5 Dexterity Vest                         | 10     | 20      | 1    | 9           | 19           |
+      | +5 Dexterity Vest                         | -1     | 50      | 1    | -2          | 48           |
       | Aged Brie                                 | 2      | 0       | 1    | 1           | 1            |
       | Aged Brie                                 | 2      | 50      | 1    | 1           | 50           |
       | Aged Brie                                 | -1     | 48      | 1    | -2          | 50           |

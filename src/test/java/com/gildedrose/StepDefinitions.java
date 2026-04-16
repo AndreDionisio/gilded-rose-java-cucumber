@@ -61,5 +61,9 @@ public class StepDefinitions {
         assertEquals(expected, items[0].quality);
     }
 
+    @Then("the item description should be {string}")
+    public void the_item_description_should_be(String expectedDescription) {
+        assertEquals(expectedDescription, items[0].toString());
+    }
 }
 
