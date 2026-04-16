@@ -9,7 +9,7 @@ public final class ItemRules {
         item.quality = 0;
     }
     static void increaseQuality(Item item) {
-        item.quality += 1;
+        item.quality = Math.min(50, item.quality+1);
     }
     static void decreaseQuality(Item item, int amount) {
         item.quality = Math.max(0, item.quality - amount);

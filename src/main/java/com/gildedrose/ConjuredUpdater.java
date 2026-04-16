@@ -9,7 +9,7 @@ public class ConjuredUpdater implements ItemUpdater {
         decreaseQuality(item, 2);
         decreaseSellIn(item);
         if (isSellInLessThan0(item) && isQualityGreaterThan0(item)) {
-            decreaseQuality(item);
+            decreaseQuality(item, 2);
         }
     }
 }
