@@ -18,8 +18,19 @@ public class StepDefinitions {
     }
 
     @After
-    public void printScenarioStatus(){
-        System.out.printf("Then the final SellIn is %d and the final Quality is %d",items[0].sellIn,items[0].quality);
+    public void printScenarioStatus() {
+        Item[] currentItems = GildedRose.getItems();
+        if (currentItems == null || currentItems.length == 0) return;
+
+        if (currentItems.length == 1) {
+            System.out.printf("Then the final SellIn is %d and the final Quality is %d%n",
+                    currentItems[0].sellIn, currentItems[0].quality);
+        } else {
+            System.out.println("Final state of all items:");
+            for (Item item : currentItems) {
+                System.out.println(item.toString());
+            }
+        }
     }
 
     @Given("The item as {string}")
@@ -64,6 +75,33 @@ public class StepDefinitions {
     @Then("the item description should be {string}")
     public void the_item_description_should_be(String expectedDescription) {
         assertEquals(expectedDescription, items[0].toString());
+    }
+
+    @Given("the standard set of inventory items")
+    public void the_standard_set_of_inventory_items() {
+        Item[] items = new Item[] {
+                new Item("+5 Dexterity Vest", 10, 20),
+                new Item("Aged Brie", 2, 0),
+                new Item("Elixir of the Mongoose", 5, 7),
+                new Item("Sulfuras, Hand of Ragnaros", 0, 80),
+                new Item("Sulfuras, Hand of Ragnaros", -1, 80),
+                new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
+                new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
+                new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
+                new Item("Conjured Mana Cake", 3, 6)
+        };
+        GildedRose.setItems(items);
+    }
+
+    @Then("the item {string} should have sellIn {int} and quality {int}")
+    public void verify_specific_item_state(String name, int sellIn, int quality) {
+        Item match = java.util.Arrays.stream(GildedRose.getItems())
+                .filter(i -> i.name.equals(name))
+                .findFirst()
+                .orElseThrow();
+
+        assertEquals(sellIn, match.sellIn);
+        assertEquals(quality, match.quality);
     }
 }
 
