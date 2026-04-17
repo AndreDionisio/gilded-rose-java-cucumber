@@ -28,4 +28,5 @@ Feature: Daily quality update simulation
       | Backstage passes to a TAFKAL80ETC concert | 0      | 10      | 1    | -1          | 0            |
       | Conjured Mana Cake                        | 3      | 6       | 1    | 2           | 4            |
       | Conjured Mana Cake	                      |-1	   | 6	     | 1    | -2          | 2            |
+      | Conjured Mana Cake	                      |-1	   | -6      | 1    | -2          | 0            |
 

@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @IncludeEngines("cucumber")
 @SelectClasspathResource("com/gildedrose")
 @ConfigurationParameter(key = Constants.GLUE_PROPERTY_NAME, value = "com.gildedrose")
-public class RunCucumberTest {
+class RunCucumberTest {
 
     @Test
     void testGildedRoseConstructorIsPrivate() throws Exception {
@@ -37,11 +37,8 @@ public class RunCucumberTest {
 
     @Test
     void testTexttestFixtureMain() {
-        // 1. Test without arguments (covers default days = 2)
         assertDoesNotThrow(() -> TexttestFixture.main(new String[]{}));
 
-        // 2. Test with arguments (covers the if(args.length > 0) branch)
-        // We pass "1", which the code parses as days = 1 + 1 = 2
         assertDoesNotThrow(() -> TexttestFixture.main(new String[]{"1"}));
     }
 

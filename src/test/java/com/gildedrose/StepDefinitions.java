@@ -79,7 +79,7 @@ public class StepDefinitions {
 
     @Given("the standard set of inventory items")
     public void the_standard_set_of_inventory_items() {
-        Item[] items = new Item[] {
+        GildedRose.setItems(new Item[] {
                 new Item("+5 Dexterity Vest", 10, 20),
                 new Item("Aged Brie", 2, 0),
                 new Item("Elixir of the Mongoose", 5, 7),
@@ -89,8 +89,7 @@ public class StepDefinitions {
                 new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
                 new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
                 new Item("Conjured Mana Cake", 3, 6)
-        };
-        GildedRose.setItems(items);
+        });
     }
 
     @Then("the item {string} should have sellIn {int} and quality {int}")

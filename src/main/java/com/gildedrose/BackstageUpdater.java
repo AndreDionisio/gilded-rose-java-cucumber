@@ -2,11 +2,9 @@ package com.gildedrose;
 
 import static com.gildedrose.ItemRules.*;
 
-public class BackstageUpdater implements ItemUpdater {
-
+public class BackstageUpdater extends AbstractItemUpdater {
     @Override
-    public void update(Item item) {
-
+    protected void applyPreUpdateLogic(Item item) {
         if (isQualityLessThan50(item)) {
             increaseQuality(item);
 
@@ -18,9 +16,10 @@ public class BackstageUpdater implements ItemUpdater {
                 increaseQuality(item);
             }
         }
+    }
 
-        decreaseSellIn(item);
-
+    @Override
+    protected void applyPostUpdateLogic(Item item) {
         if (isSellInLessThan0(item)) {
             zeroQuality(item);
         }

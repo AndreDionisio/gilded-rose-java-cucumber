@@ -2,17 +2,18 @@ package com.gildedrose;
 
 import static com.gildedrose.ItemRules.*;
 
-public class AgedBrieUpdater  implements ItemUpdater {
+public class AgedBrieUpdater extends AbstractItemUpdater {
 
     @Override
-    public void update(Item item) {
-
+    protected void applyPreUpdateLogic(Item item) {
         if (isQualityLessThan50(item)) {
             increaseQuality(item);
         }
+    }
 
-        decreaseSellIn(item);
-
+    @Override
+    protected void applyPostUpdateLogic(Item item) {
+        // The "expired" logic
         if (isSellInLessThan0(item) && isQualityLessThan50(item)) {
             increaseQuality(item);
         }
