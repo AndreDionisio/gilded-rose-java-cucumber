@@ -9,7 +9,7 @@ public class ConjuredUpdater extends AbstractItemUpdater {
     }
     @Override
     protected void applyPostUpdateLogic(Item item){
-        if (isSellInLessThan0(item) && isQualityGreaterThan0(item)) {
+        if (isMinQuality.negate().and(isExpired).test(item)) {
             decreaseQuality(item, 2);
         }
     }

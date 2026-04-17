@@ -29,4 +29,6 @@ Feature: Daily quality update simulation
       | Conjured Mana Cake                        | 3      | 6       | 1    | 2           | 4            |
       | Conjured Mana Cake	                      |-1	   | 6	     | 1    | -2          | 2            |
       | Conjured Mana Cake	                      |-1	   | -6      | 1    | -2          | 0            |
+      | Conjured Mana Cake	                      |-1	   | 50      | 1    | -2          | 46           |
+      | Conjured Mana Cake                        | 50     | 50      | 1    | 49          | 48           |
 

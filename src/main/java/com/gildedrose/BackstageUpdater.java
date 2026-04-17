@@ -5,14 +5,14 @@ import static com.gildedrose.ItemRules.*;
 public class BackstageUpdater extends AbstractItemUpdater {
     @Override
     protected void applyPreUpdateLogic(Item item) {
-        if (isQualityLessThan50(item)) {
+        if (isMaxQuality.negate().test(item)) {
             increaseQuality(item);
 
-            if (isSellInLessThan11(item) && isQualityLessThan50(item)) {
+            if (hasFewerDaysThan.test(item, 11) && isMaxQuality.negate().test(item)) {
                 increaseQuality(item);
             }
 
-            if (isSellInLessThan6(item) && isQualityLessThan50(item)) {
+            if (hasFewerDaysThan.test(item, 6) && isMaxQuality.negate().test(item)) {
                 increaseQuality(item);
             }
         }
@@ -20,7 +20,7 @@ public class BackstageUpdater extends AbstractItemUpdater {
 
     @Override
     protected void applyPostUpdateLogic(Item item) {
-        if (isSellInLessThan0(item)) {
+        if (isExpired.test(item)) {
             zeroQuality(item);
         }
     }

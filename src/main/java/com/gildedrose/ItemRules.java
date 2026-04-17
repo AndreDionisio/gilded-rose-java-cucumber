@@ -1,5 +1,8 @@
 package com.gildedrose;
 
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
+
 public final class ItemRules {
 
     private ItemRules() {
@@ -20,19 +23,9 @@ public final class ItemRules {
     static void decreaseSellIn(Item item) {
         item.sellIn--;
     }
-    static boolean isQualityLessThan50(Item item){
-        return item.quality < 50;
-    }
-    static boolean isQualityGreaterThan0(Item item){
-        return item.quality > 0;
-    }
-    static boolean isSellInLessThan11(Item item){
-        return item.sellIn < 11;
-    }
-    static boolean isSellInLessThan6(Item item){
-        return item.sellIn < 6;
-    }
-    static boolean isSellInLessThan0(Item item){
-        return item.sellIn < 0;
-    }
+
+    static final BiPredicate<Item, Integer> hasFewerDaysThan = (item, days) -> item.sellIn < days;
+    static final Predicate<Item> isMinQuality = item -> item.quality <= 0;
+    static final Predicate<Item> isMaxQuality = item -> item.quality >= 50;
+    static final Predicate<Item> isExpired = item -> item.sellIn < 0;
 }

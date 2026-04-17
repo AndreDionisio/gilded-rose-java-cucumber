@@ -6,7 +6,7 @@ public class AgedBrieUpdater extends AbstractItemUpdater {
 
     @Override
     protected void applyPreUpdateLogic(Item item) {
-        if (isQualityLessThan50(item)) {
+        if (isMaxQuality.negate().test(item)) {
             increaseQuality(item);
         }
     }
@@ -14,7 +14,7 @@ public class AgedBrieUpdater extends AbstractItemUpdater {
     @Override
     protected void applyPostUpdateLogic(Item item) {
         // The "expired" logic
-        if (isSellInLessThan0(item) && isQualityLessThan50(item)) {
+        if (isMaxQuality.negate().and(isExpired).test(item)) {
             increaseQuality(item);
         }
     }
