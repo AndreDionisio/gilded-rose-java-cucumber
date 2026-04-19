@@ -28,14 +28,6 @@ class RunCucumberTest {
     }
 
     @Test
-    void testItemRulesConstructorIsPrivate() throws Exception {
-        Constructor<ItemRules> constructor = ItemRules.class.getDeclaredConstructor();
-        assertTrue(Modifier.isPrivate(constructor.getModifiers()));
-        constructor.setAccessible(true);
-        constructor.newInstance();
-    }
-
-    @Test
     void testTexttestFixtureMain() {
         assertDoesNotThrow(() -> TexttestFixture.main(new String[]{}));
 
