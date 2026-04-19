@@ -169,3 +169,20 @@ export SONAR_TOKEN="your_token_here"
   -Dsonar.host.url=http://localhost:9000 \
   -Dsonar.token=$SONAR_TOKEN
 ```
+### Container
+
+#### Build
+```bash
+docker build -t gilded-rose-java . 
+```
+
+#### Run
+To run a 5-day simulation using Docker:
+```bash
+docker run --rm gilded-rose-java 2
+```
+
+#### Custom Log Level
+```bash
+docker run --rm -e "DEFAULT_LOG_LEVEL=INFO" gilded-rose-java 2
+```

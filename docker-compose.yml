@@ -1,0 +1,9 @@
+services:
+  app:
+    build: .
+    environment:
+      - SONAR_TOKEN=${SONAR_TOKEN}
+  sonarqube:
+    image: sonarqube:latest
+    ports:
+      - "9000:9000"
