@@ -7,7 +7,7 @@ import java.util.function.Supplier;
 public enum ItemType {
     AGED_BRIE("Aged Brie", AgedBrie::new),
     BACKSTAGE("Backstage passes to a TAFKAL80ETC concert", Backstage::new),
-    SULFURAS("Sulfuras, Hand of Ragnaros", Legendary::new), // Itens lendários não precisam de updater
+    SULFURAS("Sulfuras, Hand of Ragnaros", Legendary::new),
     CONJURED("Conjured", Conjured::new),
     DEFAULT("", Default::new);
 
