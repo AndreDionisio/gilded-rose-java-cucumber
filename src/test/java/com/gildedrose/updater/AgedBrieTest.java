@@ -26,7 +26,6 @@ class AgedBrieTest {
     @Test
     @DisplayName("Should increase quality by 2 after expiration")
     void shouldIncreaseDoubleAfterExpiration() {
-        // Expiration 0 means it will be expired (-1) after tick()
         BetterItem item = new BetterItem("Aged Brie", new Expiration(0), new Quality(10));
 
         BetterItem result = updater.update(item);
