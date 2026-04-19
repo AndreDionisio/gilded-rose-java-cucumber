@@ -28,7 +28,6 @@ class DefaultTest {
     @Test
     @DisplayName("Should decrease quality by 2 after expiration")
     void shouldDecreaseDoubleAfterExpiration() {
-        // SellIn 0 becomes -1 after tick(), triggering the second decrease
         BetterItem item = new BetterItem("Elixir of the Mongoose", new Expiration(0), new Quality(10));
 
         BetterItem result = updater.update(item);
@@ -40,7 +39,7 @@ class DefaultTest {
     @ParameterizedTest(name = "Initial quality {0} should not drop below 0")
     @CsvSource({
             "0, 0",
-            "1, 0" // Testing post-expiration drop: 1 - 1 (pre-tick) - 1 (post-tick) = 0 (clamped)
+            "1, 0"
     })
     @DisplayName("Should never decrease quality below the minimum (0)")
     void shouldRespectMinQuality(int initial, int expected) {
