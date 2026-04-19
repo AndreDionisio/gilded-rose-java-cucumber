@@ -1,4 +1,8 @@
 package com.gildedrose.updater;
 
-public interface Update {
+import com.gildedrose.rules.BetterItem;
+
+public sealed interface Update
+        permits Default, AgedBrie, Backstage, Conjured{
+    BetterItem update(BetterItem item);
 }
