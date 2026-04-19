@@ -1,27 +1,27 @@
-package com.gildedrose;
+package com.gildedrose.updater;
 
-import static com.gildedrose.ItemRules.*;
+import com.gildedrose.rules.BetterItem;
+import com.gildedrose.rules.Quality;
 
-public class BackstageUpdater extends AbstractItemUpdater {
-    @Override
-    protected void applyPreUpdateLogic(Item item) {
-        if (isMaxQuality.negate().test(item)) {
-            increaseQuality(item);
+public final class Backstage implements Update{
 
-            if (hasFewerDaysThan.test(item, 11) && isMaxQuality.negate().test(item)) {
-                increaseQuality(item);
-            }
+    public BetterItem update(BetterItem item) {
+        BetterItem updated = item.withQuality(item.quality().increase());
 
-            if (hasFewerDaysThan.test(item, 6) && isMaxQuality.negate().test(item)) {
-                increaseQuality(item);
-            }
+        if (item.expiration().hasFewerDaysThan(Quality.DOUBLE_QUALITY_THRESHOLD)) {
+            updated = updated.withQuality(updated.quality().increase());
         }
-    }
 
-    @Override
-    protected void applyPostUpdateLogic(Item item) {
-        if (isExpired.test(item)) {
-            zeroQuality(item);
+        if (item.expiration().hasFewerDaysThan(Quality.TRIPLE_QUALITY_THRESHOLD)) {
+            updated = updated.withQuality(updated.quality().increase());
         }
+
+        updated = updated.tick();
+
+        if (updated.expiration().isExpired()) {
+            updated = updated.withQuality(updated.quality().reset());
+        }
+
+        return updated;
     }
 }

@@ -1,21 +1,17 @@
-package com.gildedrose;
+package com.gildedrose.updater;
 
-import static com.gildedrose.ItemRules.*;
+import com.gildedrose.rules.BetterItem;
 
-public class AgedBrieUpdater extends AbstractItemUpdater {
+public final class AgedBrie implements Update{
+    public BetterItem update(BetterItem item) {
+        BetterItem updated = item.withQuality(item.quality().increase());
 
-    @Override
-    protected void applyPreUpdateLogic(Item item) {
-        if (isMaxQuality.negate().test(item)) {
-            increaseQuality(item);
+        updated = updated.tick();
+
+        if (updated.expiration().isExpired()) {
+            updated = updated.withQuality(updated.quality().increase());
         }
-    }
 
-    @Override
-    protected void applyPostUpdateLogic(Item item) {
-        // The "expired" logic
-        if (isMaxQuality.negate().and(isExpired).test(item)) {
-            increaseQuality(item);
-        }
+        return updated;
     }
 }

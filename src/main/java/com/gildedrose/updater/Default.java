@@ -1,18 +1,14 @@
-package com.gildedrose;
+package com.gildedrose.updater;
 
-import static com.gildedrose.ItemRules.*;
+import com.gildedrose.rules.BetterItem;
 
-public class DefaultUpdater extends AbstractItemUpdater {
-    @Override
-    protected void applyPreUpdateLogic(Item item) {
-        if (isMinQuality.negate().test(item)) {
-            decreaseQuality(item);
+public final class Default  implements Update{
+    public BetterItem update(BetterItem item){
+        BetterItem updated = item.withQuality(item.quality().decrease(1));
+        updated = updated.tick();
+        if(updated.expiration().isExpired()){
+            updated = updated.withQuality(updated.quality().decrease(1));
         }
-    }
-    @Override
-    protected void applyPostUpdateLogic(Item item){
-        if (isMinQuality.negate().and(isExpired).test(item)) {
-            decreaseQuality(item);
-        }
+        return updated;
     }
 }
