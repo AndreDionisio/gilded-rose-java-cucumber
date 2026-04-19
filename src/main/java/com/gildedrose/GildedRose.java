@@ -2,6 +2,9 @@ package com.gildedrose;
 
 import com.gildedrose.rules.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 class GildedRose {
     private static Item[] items;
 
@@ -9,9 +12,7 @@ class GildedRose {
     }
 
     public static void updateQuality() {
-        for (Item item : items) {
-            processItem(item);
-        }
+        Arrays.stream(items).forEach(GildedRose::processItem);
     }
 
     private static void processItem(Item item) {
@@ -28,6 +29,6 @@ class GildedRose {
     }
 
     public static void setItems(Item[] items) { GildedRose.items = items; }
-
+    public static void setItems(List<Item> items) { GildedRose.items = items.toArray(Item[]::new); }
     public static Item[] getItems() { return items; }
 }

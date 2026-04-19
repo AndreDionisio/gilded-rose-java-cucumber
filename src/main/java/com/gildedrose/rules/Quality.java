@@ -8,6 +8,9 @@ public record Quality(int value) {
     public static final int TRIPLE_QUALITY_THRESHOLD = 6;
     public static final int STEP = 1;
     public static final int INITIAL_VALUE = 0;
+    public static final int LOW = 7;
+    public static final int NORMAL = 20;
+    public static final int NEW = 49;
     public Quality {
         if (value != LEGENDARY_QUALITY) {
             value = Math.clamp(value, MINIMAL, MAXIMAL);

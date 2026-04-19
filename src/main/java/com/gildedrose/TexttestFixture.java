@@ -1,37 +1,46 @@
 package com.gildedrose;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
+import java.util.stream.IntStream;
+import static com.gildedrose.rules.Expiration.*;
+import static com.gildedrose.rules.Expiration.MINIMAL;
+import static com.gildedrose.rules.ItemType.*;
+import static com.gildedrose.rules.Quality.*;
+import static com.gildedrose.rules.Quality.STEP;
+
 public class TexttestFixture {
     private static final Logger log = LoggerFactory.getLogger(TexttestFixture.class);
-    static final String BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert";
+    static final String CONJURED_CAKE = "Conjured Mana Cake";
+    static final String OMGHAI = "OMGHAI!";
+    static final String VEST = "+5 Dexterity Vest";
+    static final String ELIXIR = "Elixir of the Mongoose";
     public static void main(String[] args) {
-        log.info("OMGHAI!");
+        log.info(OMGHAI);
 
-        Item[] items = new Item[] {
-                new Item("+5 Dexterity Vest", 10, 20),
-                new Item("Aged Brie", 2, 0),
-                new Item("Elixir of the Mongoose", 5, 7),
-                new Item("Sulfuras, Hand of Ragnaros", 0, 80),
-                new Item("Sulfuras, Hand of Ragnaros", -1, 80),
-                new Item(BACKSTAGE, 15, 20),
-                new Item(BACKSTAGE, 10, 49),
-                new Item(BACKSTAGE, 5, 49),
-                new Item("Conjured Mana Cake", 3, 6) };
+        final List<Item> items = List.of(
+                new Item(VEST, SPRINT, NORMAL),
+                new Item(AGED_BRIE.name(), WEEKEND, MINIMAL),
+                new Item(ELIXIR, WORKDAYS, LOW),
+                new Item(SULFURAS.name(), MINIMAL, LEGENDARY_QUALITY),
+                new Item(SULFURAS.name(), YESTERDAY, LEGENDARY_QUALITY),
+                new Item(BACKSTAGE.name(), VACATION, NORMAL),
+                new Item(BACKSTAGE.name(), SPRINT, NEW),
+                new Item(BACKSTAGE.name(), WORKDAYS, NEW),
+                new Item(CONJURED_CAKE, BIG_WEEKEND, TRIPLE_QUALITY_THRESHOLD)
+        );
 
         GildedRose.setItems(items);
-        int days = 2;
-        if (args.length > 0) {
-            days = Integer.parseInt(args[0]) + 1;
-        }
+        int days = (args.length > INITIAL_VALUE) ? Integer.parseInt(args[INITIAL_VALUE]) + STEP : STEP;
 
-        for (int i = 0; i < days; i++) {
-            log.debug("-------- day {} --------", i);
-            log.debug("name, sellIn, quality");
-            for (Item item : items) {
-                log.debug("{}", item);
-            }
-            GildedRose.updateQuality();
-        }
+        IntStream.range(INITIAL_VALUE, days).forEach(day -> runDailyUpdate(day, items));
     }
+    private static void runDailyUpdate(int day, List<Item> items) {
+        log.debug("-------- day {} --------", day);
+        log.debug("name, sellIn, quality");
 
+        items.forEach(item -> log.debug("{}", item));
+        GildedRose.updateQuality();
+    }
 }
