@@ -36,7 +36,6 @@ class ItemTypeTest {
     @Test
     @DisplayName("Should return Default updater for empty string or null-like matches")
     void fallbackToDefault() {
-        // Testing the orElseGet branch
         Update updater = ItemType.getUpdaterFor("");
         assertInstanceOf(Default.class, updater);
     }
