@@ -7,15 +7,15 @@ A professional refactoring of the Gilded Rose Kata in **Java 23**, evolving a le
 
 ## Tech Stack
 
-| Concern | Tool / Version |
-|---|---|
+| Concern | Tool / Version                                      |
+|---|-----------------------------------------------------|
 | Language | Java 23 (Records, Switch Expressions, `Math.clamp`) |
-| Build | Gradle |
-| Logging | SLF4J + Logback |
-| Unit Testing | JUnit 5 |
-| Acceptance Testing | Cucumber (BDD) |
-| Coverage | JaCoCo |
-| Static Analysis | SonarQube |
+| Build | Gradle / Maven 3.9.6 (Wrapper)                      |
+| Logging | SLF4J + Logback                                     |
+| Unit Testing | JUnit 5                                             |
+| Acceptance Testing | Cucumber (BDD)                                      |
+| Coverage | JaCoCo                                              |
+| Static Analysis | SonarQube                                           |
 
 ---
 
@@ -108,18 +108,25 @@ Followed **Expand and Contract** combined with **TDD**:
 
 ## How to Build and Test
 
+The project supports both builds as **Gradle** or **Maven**. 
+Choose your tool wisely:
+### Gradle
 ```bash
 # Build and run all tests (JUnit + Cucumber)
 ./gradlew clean test
 ```
-
+### Maven
+```bash
+# Build and run all tests (JUnit + Cucumber)
+./mvnw clean test
+```
 ### SonarQube Analysis
 
 ```bash
 # Start SonarQube locally
 docker run -d --name sonarqube -p 9000:9000 sonarqube:latest
 ```
-
+### Gradle
 ```powershell
 # Run analysis (PowerShell)
 $env:SONAR_TOKEN = "your_token_here"
@@ -136,6 +143,27 @@ $env:SONAR_TOKEN = "your_token_here"
 export SONAR_TOKEN="your_token_here"
 
 ./gradlew clean test sonar \
+  -Dsonar.projectKey=Java-Cucumber \
+  -Dsonar.projectName=Java-Cucumber \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.token=$SONAR_TOKEN
+```
+
+### Maven
+
+```powershell
+# PowerShell
+.\mvnw clean verify sonar:sonar `
+  "-Dsonar.projectKey=Java-Cucumber" `
+  "-Dsonar.projectName=Java-Cucumber" `
+  "-Dsonar.host.url=http://localhost:9000" `
+  "-Dsonar.login=$env:SONAR_TOKEN"
+```
+
+```bash
+# Run analysis (Bash/Linux/macOS)
+
+.\mvnw clean verify sonar:sonar \
   -Dsonar.projectKey=Java-Cucumber \
   -Dsonar.projectName=Java-Cucumber \
   -Dsonar.host.url=http://localhost:9000 \
