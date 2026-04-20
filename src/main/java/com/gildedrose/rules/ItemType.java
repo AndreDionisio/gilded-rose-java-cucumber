@@ -3,13 +3,13 @@ package com.gildedrose.rules;
 import com.gildedrose.updater.*;
 import java.util.Arrays;
 import java.util.function.Supplier;
-
+import static com.gildedrose.rules.DomainConstants.*;
 public enum ItemType {
-    AGED_BRIE("Aged Brie", AgedBrie::new),
-    BACKSTAGE("Backstage passes to a TAFKAL80ETC concert", Backstage::new),
-    SULFURAS("Sulfuras, Hand of Ragnaros", Legendary::new),
-    CONJURED("Conjured", Conjured::new),
-    DEFAULT("", Default::new);
+    AGED_BRIE(DomainConstants.AGED_BRIE, AgedBrie::new),
+    BACKSTAGE(DomainConstants.BACKSTAGE, Backstage::new),
+    SULFURAS(DomainConstants.SULFURAS, Legendary::new),
+    CONJURED(DomainConstants.CONJURED, Conjured::new),
+    DEFAULT(DomainConstants.DEFAULT, Default::new);
 
     private final String name;
     private final Supplier<Update> updaterSupplier;
@@ -20,7 +20,7 @@ public enum ItemType {
     }
 
     public static Update getUpdaterFor(String itemName) {
-        if (itemName.startsWith("Conjured")) return new Conjured();
+        if (itemName.startsWith(DomainConstants.CONJURED)) return new Conjured();
 
         return Arrays.stream(values())
                 .filter(type -> type.name.equals(itemName))

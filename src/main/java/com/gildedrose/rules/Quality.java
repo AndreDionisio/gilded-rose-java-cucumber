@@ -1,27 +1,24 @@
 package com.gildedrose.rules;
 
+import static com.gildedrose.rules.DomainConstants.*;
+
 public record Quality(int value) {
-    public static final int MINIMAL = 0;
-    public static final int MAXIMAL = 50;
-    public static final int LEGENDARY_QUALITY = 80;
-    public static final int DOUBLE_QUALITY_THRESHOLD = 11;
-    public static final int TRIPLE_QUALITY_THRESHOLD = 6;
-    public static final int STEP = 1;
-    public static final int INITIAL_VALUE = 0;
-    public static final int LOW = 7;
-    public static final int NORMAL = 20;
-    public static final int NEW = 49;
+
     public Quality {
         if (value != LEGENDARY_QUALITY) {
             value = Math.clamp(value, MINIMAL, MAXIMAL);
         }
     }
     public Quality increase() {
-        return new Quality(value + STEP);
+        return new Quality(value + Math.abs(STEP));
     }
 
-    public Quality decrease(int amount) {
-        return new Quality(value - amount);
+    public Quality decrease() {
+        return decreaseAmount(STEP);
+    }
+
+    public Quality decreaseAmount(int amount) {
+        return new Quality(value - Math.abs(amount));
     }
 
     public Quality reset() {

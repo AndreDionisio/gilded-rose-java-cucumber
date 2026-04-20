@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static com.gildedrose.rules.DomainConstants.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class QualityTest {
@@ -37,10 +38,10 @@ class QualityTest {
     @DisplayName("Should decrease quality by amount but not go below 0")
     void decreaseQuality() {
         Quality q = new Quality(10);
-        assertEquals(8, q.decrease(2).value());
+        assertEquals(8, q.decreaseAmount(2).value());
 
         Quality min = new Quality(1);
-        assertEquals(0, min.decrease(5).value());
+        assertEquals(0, min.decreaseAmount(5).value());
     }
 
     @Test
@@ -51,7 +52,7 @@ class QualityTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {Quality.MINIMAL, Quality.MAXIMAL, Quality.LEGENDARY_QUALITY})
+    @ValueSource(ints = {MINIMAL, MAXIMAL, LEGENDARY_QUALITY})
     @DisplayName("Constants should match business rules")
     void constantsMatch(int val) {
         Quality q = new Quality(val);
