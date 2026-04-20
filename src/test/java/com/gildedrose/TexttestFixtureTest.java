@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-public class TexttestFixtureTest {
+class TexttestFixtureTest {
     @Test
     @DisplayName("Should execute main fixture without exceptions for various arguments")
     void testTexttestFixtureMain() {
