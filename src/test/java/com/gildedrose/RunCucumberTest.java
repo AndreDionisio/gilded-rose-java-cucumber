@@ -1,6 +1,6 @@
 package com.gildedrose;
 
-import com.gildedrose.rules.DomainConstants;
+import com.gildedrose.constants.DomainConstants;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;
