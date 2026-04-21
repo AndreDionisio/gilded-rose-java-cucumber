@@ -1,6 +1,6 @@
 package com.gildedrose.rules;
 
-import static com.gildedrose.rules.DomainConstants.*;
+import static com.gildedrose.constants.DomainConstants.*;
 
 public record Quality(int value) {
 

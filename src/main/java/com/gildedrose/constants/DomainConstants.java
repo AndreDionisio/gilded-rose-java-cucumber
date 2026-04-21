@@ -1,4 +1,4 @@
-package com.gildedrose.rules;
+package com.gildedrose.constants;
 
 public class DomainConstants {
     private DomainConstants() {}

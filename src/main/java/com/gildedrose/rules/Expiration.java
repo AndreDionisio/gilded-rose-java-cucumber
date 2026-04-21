@@ -1,12 +1,12 @@
 package com.gildedrose.rules;
 
-import static com.gildedrose.rules.DomainConstants.MINIMAL;
-import static com.gildedrose.rules.DomainConstants.STEP;
+import static com.gildedrose.constants.DomainConstants.MINIMAL;
+import static com.gildedrose.constants.DomainConstants.STEP;
 
 public record Expiration(int days) {
 
     public Expiration nextDay() {
-        return new Expiration(days - STEP);
+        return new Expiration(days - Math.abs(STEP));
     }
 
     public boolean isExpired() { return days < MINIMAL; }

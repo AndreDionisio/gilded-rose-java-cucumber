@@ -1,9 +1,10 @@
 package com.gildedrose.rules;
 
+import com.gildedrose.constants.DomainConstants;
 import com.gildedrose.updater.*;
 import java.util.Arrays;
 import java.util.function.Supplier;
-import static com.gildedrose.rules.DomainConstants.*;
+
 public enum ItemType {
     AGED_BRIE(DomainConstants.AGED_BRIE, AgedBrie::new),
     BACKSTAGE(DomainConstants.BACKSTAGE, Backstage::new),
