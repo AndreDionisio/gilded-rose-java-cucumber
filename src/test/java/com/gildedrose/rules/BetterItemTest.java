@@ -44,11 +44,11 @@ class BetterItemTest {
     @Test
     @DisplayName("Should maintain identity of the name")
     void testNamePersistence() {
-        String name = "Test Item";
-        BetterItem item = new BetterItem(name, new Expiration(5), new Quality(10));
 
-        assertEquals(name, item.name());
-        assertEquals(name, item.tick().name());
-        assertEquals(name, item.withQuality(new Quality(0)).name());
+        BetterItem item = new BetterItem(NAME, new Expiration(FIVE_DAYS), new Quality(QUALITY_OF_TEN));
+
+        assertEquals(NAME, item.name());
+        assertEquals(NAME, item.tick().name());
+        assertEquals(NAME, item.withQuality(new Quality(QUALITY_OF_ZERO)).name());
     }
 }
