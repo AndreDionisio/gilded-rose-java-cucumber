@@ -1,5 +1,6 @@
 package com.gildedrose;
 
+import com.gildedrose.rules.DomainConstants;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;
@@ -22,6 +23,14 @@ class RunCucumberTest {
     @Test
     void testGildedRoseConstructorIsPrivate() throws Exception {
         Constructor<GildedRose> constructor = GildedRose.class.getDeclaredConstructor();
+        assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+        constructor.setAccessible(true);
+        constructor.newInstance();
+    }
+
+    @Test
+    void testDomainConstantsConstructorIsPrivate() throws Exception {
+        Constructor<DomainConstants> constructor = DomainConstants.class.getDeclaredConstructor();
         assertTrue(Modifier.isPrivate(constructor.getModifiers()));
         constructor.setAccessible(true);
         constructor.newInstance();
