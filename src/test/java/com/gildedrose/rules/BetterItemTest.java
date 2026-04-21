@@ -3,6 +3,8 @@ package com.gildedrose.rules;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static com.gildedrose.constants.TestConstants.*;
+import static com.gildedrose.rules.DomainConstants.SPRINT;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BetterItemTest {
@@ -10,17 +12,18 @@ class BetterItemTest {
     @Test
     @DisplayName("Should create a new instance with decremented expiration when tick is called")
     void testTick() {
-        Expiration initialExpiration = new Expiration(10);
-        Quality initialQuality = new Quality(20);
+        Expiration initialExpiration = new Expiration(TEN_DAYS);
+        Quality initialQuality = new Quality(QUALITY_OF_20);
         BetterItem item = new BetterItem("Standard Item", initialExpiration, initialQuality);
 
         BetterItem tickedItem = item.tick();
 
-        assertEquals(9, tickedItem.expiration().days());
-        assertEquals(20, tickedItem.quality().value());
+        assertEquals(NINE_DAYS, tickedItem.expiration().days());
+        assertEquals(QUALITY_OF_20, tickedItem.quality().value());
 
         assertNotSame(item, tickedItem);
-        assertEquals(10, item.expiration().days());
+        assertEquals(TEN_DAYS, item.expiration().days());
+        assertEquals(QUALITY_OF_20, item.quality().value());
     }
 
     @Test
