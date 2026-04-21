@@ -4,10 +4,10 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.stream.IntStream;
-import static com.gildedrose.rules.DomainConstants.*;
-import static com.gildedrose.rules.DomainConstants.AGED_BRIE;
-import static com.gildedrose.rules.DomainConstants.BACKSTAGE;
-import static com.gildedrose.rules.DomainConstants.SULFURAS;
+import static com.gildedrose.constants.DomainConstants.*;
+import static com.gildedrose.constants.DomainConstants.AGED_BRIE;
+import static com.gildedrose.constants.DomainConstants.BACKSTAGE;
+import static com.gildedrose.constants.DomainConstants.SULFURAS;
 
 public class TexttestFixture {
     private static final Logger log = LoggerFactory.getLogger(TexttestFixture.class);
