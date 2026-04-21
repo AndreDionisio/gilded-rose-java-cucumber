@@ -18,6 +18,7 @@ public class DomainConstants {
     public static final int LOW = 7;
     public static final int NORMAL = 20;
     public static final int NEW = 49;
+    public static final int CONJURED_STEP = 2;
     public static final String CONJURED_CAKE = "Conjured Mana Cake";
     public static final String OMGHAI = "OMGHAI!";
     public static final String VEST = "+5 Dexterity Vest";
