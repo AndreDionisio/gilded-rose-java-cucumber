@@ -10,4 +10,5 @@ public class TestConstants {
     public static final int QUALITY_OF_THIRTY = 30;
     public static final String STANDARD_ITEM = "Standard Item";
     public static final String NAME = "Test Item";
+
 }

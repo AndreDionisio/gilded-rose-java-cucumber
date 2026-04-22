@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static com.gildedrose.constants.TestConstants.NINE_DAYS;
+import static com.gildedrose.constants.TestConstants.TEN_DAYS;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ExpirationTest {
@@ -12,11 +14,11 @@ class ExpirationTest {
     @Test
     @DisplayName("Should decrease days when nextDay is called")
     void shouldDecreaseDays() {
-        Expiration expiration = new Expiration(10);
+        Expiration expiration = new Expiration(TEN_DAYS);
         Expiration next = expiration.nextDay();
 
-        assertEquals(9, next.days());
-        assertEquals(10, expiration.days(), "Original record should remain immutable");
+        assertEquals(NINE_DAYS, next.days());
+        assertEquals(TEN_DAYS, expiration.days(), "Original record should remain immutable");
     }
 
     @ParameterizedTest(name = "Days {0} should result in isExpired = {1}")
