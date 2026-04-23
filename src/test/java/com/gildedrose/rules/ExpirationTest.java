@@ -1,12 +1,16 @@
 package com.gildedrose.rules;
 
+import com.gildedrose.constants.TestConstants;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import static com.gildedrose.constants.TestConstants.NINE_DAYS;
-import static com.gildedrose.constants.TestConstants.TEN_DAYS;
+import java.util.stream.Stream;
+
+import static com.gildedrose.constants.TestConstants.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ExpirationTest {
@@ -22,17 +26,19 @@ class ExpirationTest {
     }
 
     @ParameterizedTest(name = "Days {0} should result in isExpired = {1}")
-    @CsvSource({
-            "1, false",
-            "0, false",
-            "-1, true",
-            "-10, true"
-    })
+    @MethodSource("provideValues")
     @DisplayName("Should correctly identify if an item is expired")
     void testIsExpired(int days, boolean expected) {
         assertEquals(expected, new Expiration(days).isExpired());
     }
-
+    private static Stream<Arguments> provideValues() {
+        return Stream.of(
+                Arguments.of(TestConstants.TOMORROW, TestConstants.VALID),
+                Arguments.of(TestConstants.TODAY, TestConstants.VALID),
+                Arguments.of(TestConstants.YESTERDAY, TestConstants.EXPIRED),
+                Arguments.of(TestConstants.EXPIRED_TEN_DAYS, TestConstants.EXPIRED)
+        );
+    }
     @ParameterizedTest(name = "Days {0} has fewer than {1} should be {2}")
     @CsvSource({
             "10, 11, true",
