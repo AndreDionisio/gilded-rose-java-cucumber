@@ -125,6 +125,10 @@ Choose your tool wisely:
 ```bash
 # Start SonarQube locally
 docker run -d --name sonarqube -p 9000:9000 sonarqube:latest
+
+or
+
+docker start sonarqube
 ```
 ### Gradle
 ```powershell
@@ -185,4 +189,8 @@ docker run --rm gilded-rose-java 2
 #### Custom Log Level
 ```bash
 docker run --rm -e "DEFAULT_LOG_LEVEL=INFO" gilded-rose-java 2
+```
+#### Axoniq server
+```bash
+docker run -d -p 8024:8024 -p 8124:8124 --name axonserver axoniq/axonserver
 ```
