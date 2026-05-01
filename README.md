@@ -162,6 +162,12 @@ export SONAR_TOKEN="your_token_here"
   "-Dsonar.projectName=Java-Cucumber" `
   "-Dsonar.host.url=http://localhost:9000" `
   "-Dsonar.login=$env:SONAR_TOKEN"
+# PowerShell Coverage
+./gradlew clean test jacocoTestReport sonar `
+  "-Dsonar.projectKey=Java-Cucumber" `
+  "-Dsonar.projectName=Java-Cucumber" `
+  "-Dsonar.host.url=http://localhost:9000" `
+  "-Dsonar.token=$env:SONAR_TOKEN"
 ```
 
 ```bash
@@ -193,4 +199,8 @@ docker run --rm -e "DEFAULT_LOG_LEVEL=INFO" gilded-rose-java 2
 #### Axoniq server
 ```bash
 docker run -d -p 8024:8024 -p 8124:8124 --name axonserver axoniq/axonserver
+```
+#Run
+```bash
+./gradlew bootRun
 ```
