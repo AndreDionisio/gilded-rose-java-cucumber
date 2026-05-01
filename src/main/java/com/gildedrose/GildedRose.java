@@ -1,10 +1,11 @@
 package com.gildedrose;
 
 import com.gildedrose.rules.*;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
-
+@Service
 class GildedRose {
     private static Item[] items;
 
