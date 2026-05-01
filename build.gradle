@@ -3,6 +3,8 @@ plugins {
     id "groovy"
     id "jacoco"
     id "org.sonarqube" version "7.2.3.7755"
+    id "org.springframework.boot" version "3.4.0"
+    id "io.spring.dependency-management" version "1.1.6"
 }
 
 repositories {
@@ -16,19 +18,16 @@ java {
 }
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter' // Core do Spring
     implementation 'org.codehaus.groovy:groovy:3.0.8'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    // Logging
-    implementation 'org.slf4j:slf4j-api:1.7.32'
-    implementation 'ch.qos.logback:logback-classic:1.5.13'
-
-    // Testing
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
-    testImplementation 'org.junit.platform:junit-platform-suite:1.10.0'
-
-    // Cucumber
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.junit.platform:junit-platform-suite'
     testImplementation 'io.cucumber:cucumber-java:7.14.0'
     testImplementation 'io.cucumber:cucumber-junit-platform-engine:7.14.0'
+    testImplementation 'io.cucumber:cucumber-spring:7.14.0' // Essencial para Spring + Cucumber
+
 }
 
 configurations {
@@ -66,8 +65,9 @@ tasks.register('cucumber') {
 jacocoTestReport {
     dependsOn test
     reports {
-        xml.required = true   // Required for SonarQube
-        html.required = true  // Human-readable report
+        xml.required = true
+        csv.required = false
+        html.required = true
     }
 }
 
