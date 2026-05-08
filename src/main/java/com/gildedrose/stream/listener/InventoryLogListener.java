@@ -1,8 +1,6 @@
-package com.gildedrose.listener;
+package com.gildedrose.stream.listener;
 
-import com.gildedrose.GildedRoseApplication;
-import com.gildedrose.Item;
-import com.gildedrose.events.ItemUpdatedEvent;
+import com.gildedrose.stream.events.ItemUpdatedEvent;
 import com.gildedrose.rules.BetterItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +13,8 @@ public class InventoryLogListener {
 
     @EventListener
     public void handleItemUpdate(ItemUpdatedEvent event) {
-        BetterItem item = event.getBetterItem();
         if (log.isDebugEnabled()) {
-            log.debug("[LOG EVENTO] Item processado: " + item.name() + " | Nova Qualidade: " + item.quality());
+            log.debug("[LOG EVENTO] Item processado: " + event.name() + " | Nova Qualidade: " + event.quality());
         }
     }
 }

@@ -1,4 +1,10 @@
 package com.gildedrose.command;
 
-public class CreateItemCommand {
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
+
+public record CreateItemCommand(
+        @TargetAggregateIdentifier String name,
+        int sellIn,
+        int quality
+) {
 }

@@ -27,7 +27,9 @@ import static com.gildedrose.constants.DomainConstants.YESTERDAY;
 
 @RestController
 public class GildedRoseController {
-    public GildedRoseController() {
+    private final GildedRose gildedRose;
+    public GildedRoseController(GildedRose gildedRose) {
+        this.gildedRose = gildedRose;
         final List<Item> items = List.of(
                 new Item(VEST, SPRINT, NORMAL),
                 new Item(AGED_BRIE, WEEKEND, MINIMAL),
@@ -39,28 +41,29 @@ public class GildedRoseController {
                 new Item(BACKSTAGE, WORKDAYS, NEW),
                 new Item(CONJURED_CAKE, BIG_WEEKEND, TRIPLE_QUALITY_THRESHOLD)
         );
-        GildedRose.setItems(items);
+        this.gildedRose.setItems(items.toArray(Item[]::new));
     }
     @GetMapping("/items")
     public ResponseEntity<Item[]> getItems() {
-        return ResponseEntity.ok(GildedRose.getItems());
+        return ResponseEntity.ok(gildedRose.getItems());
     }
     @PostMapping("/item")
     public ResponseEntity<String> addItem(@RequestBody Item item) {
-        Item[] currentItems = GildedRose.getItems();
+        Item[] currentItems = this.gildedRose.getItems();
         Item[] newItems = Arrays.copyOf(currentItems, currentItems.length + 1);
         newItems[newItems.length - 1] = item;
-        GildedRose.setItems(newItems);
+        this.gildedRose.setItems(newItems);
         return ResponseEntity.status(HttpStatus.CREATED).body("Ok");
-    }
-    @PostMapping("/items/update")
-    public ResponseEntity<Item[]> runUpdate() {
-        GildedRose.updateQuality();
-        return ResponseEntity.ok(GildedRose.getItems());
     }
     @PutMapping("/items")
     public ResponseEntity<String> setItems(@RequestBody Item[] items) {
-        GildedRose.setItems(items);
+        this.gildedRose.setItems(items);
         return ResponseEntity.ok("Ok");
     }
+    @PostMapping("/items/update")
+    public ResponseEntity<Item[]> runUpdate() {
+        this.gildedRose.updateQuality();
+        return ResponseEntity.ok(this.gildedRose.getItems());
+    }
+
 }

@@ -7,6 +7,9 @@ plugins {
     id "io.spring.dependency-management" version "1.1.6"
 }
 
+group = 'com.gildedrose'
+version = '0.0.1-SNAPSHOT'
+
 repositories {
     mavenCentral()
 }
@@ -18,16 +21,22 @@ java {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter' // Core do Spring
+
+    implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.codehaus.groovy:groovy:3.0.8'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.axonframework:axon-spring-boot-starter:4.10.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.junit.platform:junit-platform-suite'
     testImplementation 'io.cucumber:cucumber-java:7.14.0'
     testImplementation 'io.cucumber:cucumber-junit-platform-engine:7.14.0'
-    testImplementation 'io.cucumber:cucumber-spring:7.14.0' // Essencial para Spring + Cucumber
-
+    testImplementation 'io.cucumber:cucumber-spring:7.14.0'
+    testImplementation 'org.axonframework:axon-test:4.10.0'
+    testImplementation 'com.h2database:h2'
+    runtimeOnly 'com.h2database:h2'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 }
 
 configurations {

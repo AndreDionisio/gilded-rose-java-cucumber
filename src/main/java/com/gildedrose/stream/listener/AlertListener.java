@@ -1,6 +1,6 @@
-package com.gildedrose.listener;
+package com.gildedrose.stream.listener;
 
-import com.gildedrose.events.ItemUpdatedEvent;
+import com.gildedrose.stream.events.ItemUpdatedEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
@@ -12,8 +12,8 @@ public class AlertListener {
 
     @EventListener
     public void onLowQuality(ItemUpdatedEvent event) {
-        if (event.getBetterItem().quality().value() < 5) {
-            log.debug("[ALERTA] Qualidade crítica para: " + event.getBetterItem().name());
+        if (event.quality() < 5) {
+            log.debug("[ALERTA] Qualidade crítica para: " + event.name());
         }
     }
 }

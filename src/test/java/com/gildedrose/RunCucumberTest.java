@@ -20,13 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ConfigurationParameter(key = Constants.GLUE_PROPERTY_NAME, value = "com.gildedrose")
 class RunCucumberTest {
 
-    @Test
-    void testGildedRoseConstructorIsPrivate() throws Exception {
-        Constructor<GildedRose> constructor = GildedRose.class.getDeclaredConstructor();
-        assertTrue(Modifier.isPrivate(constructor.getModifiers()));
-        constructor.setAccessible(true);
-        constructor.newInstance();
-    }
 
     @Test
     void testDomainConstantsConstructorIsPrivate() throws Exception {
@@ -42,6 +35,9 @@ class RunCucumberTest {
 
         assertDoesNotThrow(() -> TexttestFixture.main(new String[]{"1"}));
     }
-
+    @Test
+    void testMainMethod() {
+        assertDoesNotThrow(() -> GildedRoseApplication.main(new String[]{}));
+    }
 }
 

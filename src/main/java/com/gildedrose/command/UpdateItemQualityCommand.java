@@ -1,4 +1,6 @@
 package com.gildedrose.command;
 
-public record UpdateItemQualityCommand() {
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
+
+public record UpdateItemQualityCommand(@TargetAggregateIdentifier String id) {
 }

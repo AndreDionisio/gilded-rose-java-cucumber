@@ -204,3 +204,12 @@ docker run -d -p 8024:8024 -p 8124:8124 --name axonserver axoniq/axonserver
 ```bash
 ./gradlew bootRun
 ```
+#Run without axon server
+```bash
+implementation ('org.axonframework:axon-spring-boot-starter:4.9.1') {
+exclude group: 'org.axonframework', module: 'axon-server-connector'
+}
+```
+TODO
+Spring Cloud Stream com  Kafka
+RABBITMQ

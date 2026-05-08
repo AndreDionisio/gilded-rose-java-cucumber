@@ -1,6 +1,8 @@
 package com.gildedrose.rules;
 
-public record BetterItem(String name, Expiration expiration, Quality quality) {
+import java.io.Serializable;
+
+public record BetterItem(String name, Expiration expiration, Quality quality) implements Serializable {
 
     public BetterItem tick() {
         return new BetterItem(name, expiration.nextDay(), quality);
